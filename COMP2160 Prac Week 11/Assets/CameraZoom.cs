@@ -8,7 +8,8 @@ public class CameraZoom : MonoBehaviour
     private InputAction movementAction;
     private Actions actions;
     [SerializeField] public Camera cam;
-    private float zoomies = 35.7;
+    private float zoomies = 35.7f;
+    [SerializeField] private float zoomies2 = 12;
 
  //   [SerializeField] private float moveSpeed = 10;
     
@@ -36,9 +37,10 @@ public class CameraZoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(cam.Projection == Perspective)
-        {
-            cam.fieldOfView = movementAction.ReadValue<Value>() + 35.7;
-        }
+        
+            cam.orthographicSize += movementAction.ReadValue<float>() /zoomies2 ;
+
+            cam.fieldOfView +=  movementAction.ReadValue<float>()/zoomies2;
+        
     }
 }
