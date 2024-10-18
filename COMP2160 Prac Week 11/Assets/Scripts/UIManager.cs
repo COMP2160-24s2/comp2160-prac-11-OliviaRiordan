@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     public delegate void TargetSelectedEventHandler(Vector3 worldPosition);
     public event TargetSelectedEventHandler TargetSelected;
 #endregion
+[SerializeField] private float maxDistance = 1f;
 
 #region Init & Destroy
     void Awake()
@@ -80,9 +81,10 @@ public class UIManager : MonoBehaviour
     private void MoveCrosshair() 
     {
         Vector2 mousePos = mouseAction.ReadValue<Vector2>();
+        Debug.Log(mousePos);
 
         // FIXME: Move the crosshair position to the mouse position (in world coordinates)
-        // crosshair.position = ...;
+        crosshair.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, maxDistance));
     }
 
     private void SelectTarget()
